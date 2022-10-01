@@ -59,7 +59,7 @@ const App = () => {
                     <h2>{monthPay.toLocaleString()}</h2>
                 </div>
                 <div className={'info__item'}>
-                    <div onClick={sendData} className={'button'}>{!isSending ? 'Отправить заявку' :
+                    <div onClick={sendData} className={'button'}>{!isSending ? 'Оставить заявку' :
                         <img className={'loader'} src={loader} alt="loader"/>}</div>
                 </div>
             </div>
