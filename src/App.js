@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import FormItem from "./components/UI/form__item";
-import loader from './components/UI/Ellipse 112.png';
 import axios from "axios";
+import InfoBlock from "./components/infoBlock";
+import FormBlock from "./components/formBlock";
 
 const App = () => {
     const [price, setPrice] = useState(3300000);
@@ -36,33 +36,15 @@ const App = () => {
         <div className={'container'}>
             <h1>Рассчитать стоимость <br/>
                 автомобиля в лизинг</h1>
-            <div className={'form'}>
-                <FormItem title={"Стоимость автомобиля"} value={price} setValue={setPrice} min={1000000} max={6000000} type={2}/>
-                <FormItem title={"Первоначальный взнос"} value={initial} setValue={setInitial} type={1} percent={initialPerc}>
-                    <input type="range"
-                           onChange={e => setInitialPerc(+(e.target.value))}
-                           value={initialPerc}
-                           min={10}
-                           max={60}/>
-                </FormItem>
-
-                <FormItem title={"Срок лизинга"} value={months} setValue={setMonths} min={1} max={60} type={0} />
-
-            </div>
-            <div className="info">
-                <div className="info__item">
-                    <h4 className={'title'}>Сумма договора лизинга</h4>
-                    <h2>{sum.toLocaleString()}</h2>
-                </div>
-                <div className="info__item">
-                    <h4 className={'title'}>Ежемесячный платеж от</h4>
-                    <h2>{monthPay.toLocaleString()}</h2>
-                </div>
-                <div className={'info__item'}>
-                    <div onClick={sendData} className={'button'}>{!isSending ? 'Оставить заявку' :
-                        <img className={'loader'} src={loader} alt="loader"/>}</div>
-                </div>
-            </div>
+            <FormBlock price={price}
+                       initial={initial}
+                       initialPerc={initialPerc}
+                       months={months}
+                       setInitial={setInitial}
+                       setInitialPerc={setInitialPerc}
+                       setMonths={setMonths}
+                       setPrice={setPrice}/>
+            <InfoBlock isSending={isSending} sendData={sendData} monthPay={monthPay} sum={sum}/>
         </div>
     );
 };
